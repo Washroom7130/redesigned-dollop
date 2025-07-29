@@ -33,6 +33,18 @@ services:
     ports:
       - "5555:5555"
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - backend-net
+    ports:
+      - "3000:3000"  # Expose Next.js on port 3000
+    depends_on:
+      - mysql
+      - backend
+
 networks:
   backend-net:
     driver: bridge
